@@ -1,0 +1,28 @@
+
+        <main>
+            <?php echo "<h2> Marca: $idmarca->nombre </h2>"; ?>
+            <form action="<?= BASE_URL ?>modificar-marca" method="POST" class="my-4" id="formulario">
+
+                <input type="hidden" name="idmarca" value="<?= $idmarca->ID_Marcas ?>">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="form-group">
+                            <label>Importador</label>
+                            <input required name="importador-nuevo" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" id="importador" value="<?= $idmarca->importador ?>">
+                        </div>
+                    </div>
+
+                    <div class="col-9">
+                        <div class="form-group">
+                            <label>País de origen</label>
+                            <input required name="pais_origen-nuevo" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" id="pais_origen" value="<?= $idmarca->pais_origen ?>">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success mt-2">Modificar</button>
+                </div>
+            </form>
+        </main>
+    
+<?php
+        

@@ -1,0 +1,49 @@
+
+        <main>
+    <form action="agregar" method="POST" class="my-4" id="formulario">
+        <div class="row">
+            <div class="col-9">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input required name="nombre" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" id="nombre">
+                </div>
+            </div>
+            
+            <div class="col-9">
+                <div class="form-group">
+                    <label>Importador</label>
+                    <input required name="importador" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" id="importador">
+                </div>
+            </div>
+            
+            <div class="col-9">
+                <div class="form-group">
+                    <label>Pais de origen</label>
+                    <input required name="pais_origen" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" id="pais_origen">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2" id="boton-guardar">Guardar</button>
+    </form>
+</main>
+
+<script src="js/mayMarcas.js"></script>
+
+    
+    <ul class="list-group">
+        <?php foreach ($marcas as $marca) { ?> 
+            <li class="list-group-item marcas">
+                <div>
+                    <b><?php echo "Marca: " . htmlspecialchars($marca->nombre) . "|" . "Importador: " . htmlspecialchars($marca->importador) . "|" . "Pais de origen: " . htmlspecialchars($marca->pais_origen); ?></b>
+                </div>
+                <div class="actions">
+                    <a href="<?= BASE_URL ?>marca/<?php echo urlencode($marca->nombre); ?>" type="button" class="btn btn-primary ml-auto">Ver Productos</a>
+                    <a href="<?= BASE_URL ?>formModificar-marca/<?php echo $marca->ID_Marcas; ?>" type="button" class="btn btn-success ml-auto">Modificar</a> 
+                    <a href="<?= BASE_URL ?>eliminar/<?php echo $marca->nombre; ?>" type="button" class="btn btn-danger ml-auto">Borrar</a>
+                </div>
+            </li>
+        <?php } ?>
+    </ul>
+
+    <?php
+        
