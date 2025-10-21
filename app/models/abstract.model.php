@@ -14,7 +14,7 @@ abstract class modelAbstract
         );
         $this->_deployMarcas();
         $this->_deployProductos();
-        /*$this->_deployUsuario();*/
+        $this->_deployUsuario();
     }
 
     private function _deployUsuario()
@@ -24,14 +24,19 @@ abstract class modelAbstract
         if (count($tables) == 0) {
             $sql = <<<END
               CREATE TABLE `usuario` (
-              `id_login` int(11) NOT NULL AUTO_INCREMENT,
+              `ID_Usuario` int(11) NOT NULL AUTO_INCREMENT,
               `nombre` varchar(250) NOT NULL,
               `contraseña` char(60) NOT NULL,
-              PRIMARY KEY (`id_login`),
-              UNIQUE KEY `nombre` (`nombre`)
+              PRIMARY KEY (`ID_Usuario`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 END;
             $this->db->query($sql);
+
+            // --- INSERCIÓN DEL ADMINISTRADOR ---
+        $admin_password_hash = password_hash('admin', PASSWORD_DEFAULT);
+        $admin_sql = $this->db->prepare("INSERT INTO `usuario` (`nombre`, `contraseña`) VALUES (?, ?)");
+        $admin_sql->execute(['webadmin', $admin_password_hash]);
+        // -----------------------------------
         }
     }
 
@@ -42,15 +47,14 @@ END;
         if (count($tables) == 0) {
             $sql = <<<END
                   CREATE TABLE `productos` (
-                  `id_productos` int(11) NOT NULL AUTO_INCREMENT,
-                  `marca_producto` varchar(100) NOT NULL,
-                  `tipo_producto` varchar(100) NOT NULL,
+                  `ID_Productos` int(11) NOT NULL AUTO_INCREMENT,
+                  `nombre_marca` varchar(100) NOT NULL,
+                  `categoria` varchar(100) NOT NULL,
                   `modelo` varchar(100) NOT NULL,
-                  `color` varchar(100) NOT NULL,
-                  `descripcion_producto` TEXT NOT NULL,
+                  `descripcion` TEXT NOT NULL,
                   `precio` int(20) NOT NULL,
-                  PRIMARY KEY (`id_productos`),
-                  CONSTRAINT `marca_marca_producto_productos` FOREIGN KEY (`marca_producto`) REFERENCES `marca` (`nombre_marca`) ON DELETE CASCADE
+                  PRIMARY KEY (`ID_Productos`),
+                  CONSTRAINT `marcas_nombre_marca_productos` FOREIGN KEY (`nombre_marca`) REFERENCES `marcas` (`nombre`) ON DELETE CASCADE
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
     END;
             $this->db->query($sql);
@@ -63,13 +67,13 @@ END;
         $tables = $query->fetchAll();
         if (count($tables) == 0) {
             $sql = <<<END
-                      CREATE TABLE `marca` (
-                      `id` int(11) NOT NULL AUTO_INCREMENT,
-                      `nombre_marca` varchar(100) NOT NULL,
+                      CREATE TABLE `marcas` (
+                      `ID_Marcas` int(11) NOT NULL AUTO_INCREMENT,
+                      `nombre` varchar(100) NOT NULL,
                       `importador` varchar(100) NOT NULL,
                       `pais_origen` varchar(100) NOT NULL,
-                      PRIMARY KEY (`id`),
-                      UNIQUE KEY `nombre_marca` (`nombre_marca`)
+                      PRIMARY KEY (`ID_Marcas`),
+                      UNIQUE KEY `nombre` (`nombre`)
                     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
         END;
             $this->db->query($sql);
