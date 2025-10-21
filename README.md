@@ -13,7 +13,7 @@ Este es un proyecto en el cual elegimos crear la base de datos de una tienda de 
 ---
 
 ## Guia de uso🗺️
-###La siguiente pagina puede utilizarse siguiendo estos pasos:
+### La siguiente pagina puede utilizarse siguiendo estos pasos:
 1. Instalar XAMPP
 2. Crear una carpeta dentro de htdocs
 3. Clonar el repositorio en la carpeta creada en el punto anterior
