@@ -1,0 +1,43 @@
+
+        <main>
+            <?php echo "<h2> Marca: $idproducto->nombre_marca </h2>"; ?>
+            <form action="<?= BASE_URL ?>modificar-producto" method="POST" class="my-4" id="formulario">
+
+                <input type="hidden" name="idproducto" value="<?= $idproducto->ID_Productos  ?>">
+                <div class="row">
+                    <div class="col-9">
+                        <div class="form-group">
+                            <label>Tipo de Producto</label>
+                            <input required name="tipo-productoNuevo" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" id="tipo-productoNuevo" value="<?= $idproducto->categoria ?>">
+                        </div>
+                    </div>
+
+                    <div class="col-9">
+                        <div class="form-group">
+                            <label>Modelo del Producto</label>
+                            <input required name="modeloNuevo" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" id="modeloNuevo" value="<?= $idproducto->modelo ?>">
+                        </div>
+                    </div>
+
+                    <div class="col-9">
+                        <div class="form-group">
+                            <label>Descripción del Producto</label>
+                            <input required name="descripcionNueva" type="text" oninput="this.value = this.value.toUpperCase()" class="form-control" id="descripcionNueva" value="<?= $idproducto->descripcion ?>">
+                        </div>
+                    </div>
+
+                    <div class="col-9">
+                        <div class="form-group">
+                            <label>Precio</label>
+                            <input required name="precioNuevo" type="number" class="form-control" id="precioNuevo" value="<?= $idproducto->precio ?>">
+                        </div>
+                    </div>
+
+ 
+
+                    <button type="submit" class="btn btn-success mt-2">Modificar</button>
+                </div>
+            </form>
+        </main>
+
+
